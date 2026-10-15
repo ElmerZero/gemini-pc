@@ -1,0 +1,9 @@
+{
+  "repository": "https://github.com/vicktorgabriel/mcp-server.git",
+  "version": "4.6.1",
+  "commit": "fe1a8e679579796a2c2236ce444da52ae9ddf93b",
+  "local_patches": ["workspace-guidance-v1"],
+  "distribution": "El instalador descarga el motor desde su repositorio; el ZIP no redistribuye el motor.",
+  "account_requirements_source": "https://support.google.com/gemini/answer/17209137?co=GENIE.Platform%3DDesktop&hl=en",
+  "cli_source": "https://geminicli.com/docs/tools/mcp-server/"
+}

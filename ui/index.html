@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="app-token" content="__APP_TOKEN__">
+  <meta name="color-scheme" content="dark">
+  <title>Gemini PC · Tu conexión local</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <svg class="icon-definitions" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <symbol id="icon-star" viewBox="0 0 24 24"><path d="M12 2c1.4 6.2 3.8 8.6 10 10-6.2 1.4-8.6 3.8-10 10C10.6 15.8 8.2 13.4 2 12c6.2-1.4 8.6-3.8 10-10Z"/></symbol>
+      <symbol id="icon-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-8H9v8H4a1 1 0 0 1-1-1Z"/></symbol>
+      <symbol id="icon-activity" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h10"/><circle cx="19" cy="19" r="1"/></symbol>
+      <symbol id="icon-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 4.4 1.6c-.8.8-1.9 1-1.9 2.4M12 17h.01"/></symbol>
+      <symbol id="icon-folder" viewBox="0 0 24 24"><path d="M3 7V5a1 1 0 0 1 1-1h6l2 3h8a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7Z"/><path d="M3 9h18"/></symbol>
+      <symbol id="icon-shield" viewBox="0 0 24 24"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z"/><path d="m8 12 3 3 5-6"/></symbol>
+      <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+      <symbol id="icon-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+      <symbol id="icon-computer" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/></symbol>
+      <symbol id="icon-link" viewBox="0 0 24 24"><path d="m10 13 4-4m-6 6-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 2 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0"/></symbol>
+      <symbol id="icon-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></symbol>
+      <symbol id="icon-external" viewBox="0 0 24 24"><path d="M14 3h7v7m0-7L10 14M9 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4"/></symbol>
+      <symbol id="icon-play" viewBox="0 0 24 24"><path d="m8 4 12 8-12 8Z"/></symbol>
+      <symbol id="icon-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1"/></symbol>
+      <symbol id="icon-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10h.01"/></symbol>
+      <symbol id="icon-command" viewBox="0 0 24 24"><path d="m4 7 5 5-5 5m8 0h8"/></symbol>
+    </defs>
+  </svg>
+
+  <aside class="sidebar" aria-label="Navegación principal">
+    <a class="brand" href="#inicio" aria-label="Gemini PC, inicio">
+      <svg class="brand-star" aria-hidden="true"><use href="#icon-star"/></svg>
+      <span>Gemini <strong>PC</strong></span>
+    </a>
+    <div class="sidebar-caption">TU CONEXIÓN LOCAL</div>
+    <nav class="nav-links">
+      <a class="nav-item active" href="#inicio" data-page="inicio" aria-label="Inicio" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#icon-home"/></svg><span>Inicio</span></a>
+      <a class="nav-item" href="#actividad" data-page="actividad" aria-label="Actividad y acciones pendientes"><svg class="icon" aria-hidden="true"><use href="#icon-activity"/></svg><span>Actividad</span><span class="nav-count" id="approval-count" hidden>0</span></a>
+      <a class="nav-item" href="#ayuda" data-page="ayuda" aria-label="Ayuda"><svg class="icon" aria-hidden="true"><use href="#icon-help"/></svg><span>Ayuda</span></a>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="local-note"><svg class="icon" aria-hidden="true"><use href="#icon-computer"/></svg><span>Este equipo</span></div>
+      <p>Tu conexión. Tus permisos.</p>
+      <span class="version" id="version">Gemini PC</span>
+    </div>
+  </aside>
+
+  <div class="app-shell">
+    <header class="topbar">
+      <span class="page-label" id="page-label">Inicio</span>
+      <div class="header-actions"><span class="status-pill" id="global-status" role="status"><span class="status-dot"></span><span id="global-status-text">Cargando…</span></span><div class="panic-control"><button class="button panic-button" id="panic-button" type="button" aria-describedby="panic-help"><svg class="icon" aria-hidden="true"><use href="#icon-stop"/></svg><span id="panic-button-label">Cortar todo</span></button><span class="panic-help" id="panic-help" role="status">Detiene la conexión y cierra la app</span></div></div>
+    </header>
+    <main id="main" tabindex="-1">
+      <div class="feedback error-feedback" id="connection-error" role="alert" hidden><div><strong>No podemos hablar con la app.</strong><p>Mantén Gemini PC abierto e inténtalo otra vez.</p></div><button class="button secondary small" id="reconnect-button" type="button">Reintentar</button></div>
+      <div class="feedback error-feedback" id="action-error" role="alert" hidden><div><strong id="action-error-title">No se pudo completar</strong><p id="action-error-text"></p></div><button class="button secondary small" id="dismiss-error" type="button" aria-label="Cerrar aviso de error">Cerrar</button></div>
+      <div class="feedback operation-feedback" id="operation-banner" role="status" hidden><div><strong id="operation-label">Preparando…</strong><p>Puedes seguir revisando la app mientras termina.</p></div><button class="button quiet small" id="cancel-operation" type="button">Cancelar</button></div>
+      <div class="toast" id="toast" role="status" hidden></div>
+
+      <section class="page" id="page-inicio" aria-labelledby="home-title">
+        <div class="hero">
+          <div><p class="eyebrow">UN POCO MÁS CERCA</p><h1 id="home-title">Tu PC, conectado<br>a <span>Gemini.</span></h1><p class="hero-description">Conecta una carpeta y deja que Gemini te ayude<br class="desktop-break"> con tus archivos. Tú decides a qué tiene acceso.</p></div>
+          <div class="hero-symbol" aria-hidden="true"><svg><use href="#icon-star"/></svg><span class="hero-symbol-small"><svg class="icon"><use href="#icon-computer"/></svg></span></div>
+        </div>
+
+        <div class="loading-panel" id="loading-panel" aria-label="Cargando tu configuración"><div class="skeleton skeleton-short"></div><div class="skeleton"></div><div class="skeleton skeleton-medium"></div></div>
+
+        <section class="setup-panel panel" id="setup-panel" aria-labelledby="setup-title" hidden>
+          <div class="panel-heading"><div><p class="eyebrow" id="setup-eyebrow">EMPECEMOS</p><h2 id="setup-title">Todo listo en tres pasos</h2></div><button class="button quiet small" type="button" id="cancel-edit" hidden>Volver al inicio</button></div>
+          <ol class="stepper" aria-label="Pasos de configuración">
+            <li class="step active" data-step-indicator="1" aria-current="step"><span class="step-number">1</span><span>Carpeta</span></li>
+            <li class="step" data-step-indicator="2"><span class="step-number">2</span><span>Permisos</span></li>
+            <li class="step" data-step-indicator="3"><span class="step-number">3</span><span>Conexión</span></li>
+          </ol>
+          <form id="setup-form" novalidate>
+            <section class="form-step" data-form-step="1" aria-labelledby="folder-title">
+              <div class="step-heading"><span class="section-icon"><svg class="icon" aria-hidden="true"><use href="#icon-folder"/></svg></span><div><h3 id="folder-title" tabindex="-1">¿Con qué carpeta quieres trabajar?</h3><p>Elige dónde estarán los archivos que compartirás con Gemini.</p></div></div>
+              <div class="field"><label for="workspace">Carpeta de trabajo</label><div class="input-with-button"><input id="workspace" name="workspace" type="text" required spellcheck="false" autocomplete="off" placeholder="Selecciona una carpeta de tu equipo" aria-describedby="workspace-hint"><button id="choose-folder" class="button secondary" type="button"><svg class="icon" aria-hidden="true"><use href="#icon-folder"/></svg>Elegir carpeta</button></div><p class="field-hint" id="workspace-hint">También puedes pegar la ruta de una carpeta.</p></div>
+              <div class="soft-note"><svg class="icon" aria-hidden="true"><use href="#icon-shield"/></svg><p>Los permisos de archivos se aplican a esta carpeta. Puedes cambiarlos después.</p></div>
+            </section>
+
+            <section class="form-step" data-form-step="2" aria-labelledby="permissions-title" hidden>
+              <div class="step-heading"><span class="section-icon"><svg class="icon" aria-hidden="true"><use href="#icon-shield"/></svg></span><div><h3 id="permissions-title" tabindex="-1">Elige cómo puede ayudarte</h3><p>Empieza con lo que necesitas. Puedes cambiarlo en cualquier momento.</p></div></div>
+              <fieldset class="choice-group"><legend class="sr-only">Permisos para Gemini</legend>
+                <label class="choice"><input type="radio" name="profile" value="archivos" checked><span class="choice-content"><span class="choice-title">Trabajar con archivos <span class="badge">Recomendado</span></span><span class="choice-description">Leer, crear y editar archivos dentro de tu carpeta.</span></span></label>
+                <label class="choice"><input type="radio" name="profile" value="lectura"><span class="choice-content"><span class="choice-title">Solo consultar</span><span class="choice-description">Leer y buscar archivos, sin hacer cambios.</span></span></label>
+                <label class="choice"><input type="radio" name="profile" value="proyecto"><span class="choice-content"><span class="choice-title">Trabajar con un proyecto <span class="subtle-label">Avanzado</span></span><span class="choice-description">Añade herramientas de desarrollo y ejecución de comandos.</span></span></label>
+              </fieldset>
+              <div class="command-consent" id="command-consent" hidden><label class="check-label"><input id="allow-commands" type="checkbox"><span>Entiendo y permito ejecutar comandos en este equipo.</span></label><p>Los comandos pueden acceder a más partes del equipo. La carpeta de trabajo no los aísla.</p></div>
+              <p class="field-hint">Las acciones que necesiten tu autorización aparecerán en Actividad.</p>
+            </section>
+
+            <section class="form-step" data-form-step="3" aria-labelledby="connection-title" hidden>
+              <div class="step-heading"><span class="section-icon"><svg class="icon" aria-hidden="true"><use href="#icon-link"/></svg></span><div><h3 id="connection-title" tabindex="-1">¿Dónde usas Gemini?</h3><p>Prepararemos la conexión para tu forma de trabajar.</p></div></div>
+              <fieldset class="target-picker"><legend class="sr-only">Dónde conectar Gemini</legend><label class="target-choice"><input type="radio" name="target" value="web" checked><span><strong>Gemini en el navegador</strong><small>gemini.google.com</small></span></label><label class="target-choice"><input type="radio" name="target" value="cli"><span><strong>Gemini CLI</strong><small>Para quienes usan la terminal</small></span></label></fieldset>
+              <div id="web-connection-fields">
+                <p class="availability-note">La disponibilidad de los conectores personalizados depende de tu cuenta de Gemini. <a href="https://support.google.com/gemini/answer/17209137?hl=es" target="_blank" rel="noopener noreferrer">Consultar disponibilidad<svg class="icon tiny" aria-hidden="true"><use href="#icon-external"/></svg></a></p>
+                <div class="field" id="ngrok-field"><label for="authtoken">Código de conexión de ngrok <span class="optional" id="ngrok-optional" hidden>opcional</span></label><input id="authtoken" name="authtoken" type="password" autocomplete="off" spellcheck="false" placeholder="Pega tu authtoken de ngrok" aria-describedby="ngrok-hint"><p class="field-hint" id="ngrok-hint">Crea la dirección que Gemini usará para llegar a tu PC. <a href="https://dashboard.ngrok.com/get-started/your-authtoken" target="_blank" rel="noopener noreferrer">Obtener mi código</a></p><p class="field-hint saved-hint" id="ngrok-saved" hidden>Ya tienes un código guardado. Déjalo vacío para conservarlo.</p></div>
+              </div>
+              <div class="account-section">
+                <div class="account-saved" id="account-saved" hidden><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg><div><strong>Acceso protegido configurado</strong><p id="account-name"></p></div><label class="check-label compact"><input type="checkbox" id="change-account"><span>Cambiar</span></label></div>
+                <div id="account-fields"><h4>Protege el acceso a tu equipo</h4><p class="field-hint">Crea un usuario y una contraseña para esta conexión. No son los de tu cuenta de Google.</p><div class="field-row"><div class="field"><label for="username">Usuario de la conexión</label><input id="username" name="username" type="text" autocomplete="username" spellcheck="false" placeholder="Elige un usuario"></div><div class="field"><label for="password">Contraseña de la conexión</label><input id="password" name="password" type="password" autocomplete="new-password" minlength="12" placeholder="Al menos 12 caracteres" aria-describedby="password-hint"></div></div><p class="field-hint" id="password-hint">Guarda estos datos: Gemini te los pedirá al conectarse.</p></div>
+              </div>
+              <details class="advanced-options"><summary>Opciones avanzadas</summary><div class="advanced-content"><div class="field" id="mode-field"><label for="mode">Cómo crear la dirección de conexión</label><select id="mode" name="mode"><option value="ngrok">Automáticamente con ngrok</option><option value="direct">Usar mi propia dirección HTTPS</option><option value="local">Solo en este equipo</option></select></div><div class="field" id="base-url-field" hidden><label for="base-url">Dirección HTTPS pública</label><input id="base-url" name="baseUrl" type="url" placeholder="https://mcp.ejemplo.com" spellcheck="false" aria-describedby="base-url-hint"><p class="field-hint" id="base-url-hint">Tu proxy debe dirigir esta URL al servidor de este equipo.</p></div><div class="field port-field"><label for="port">Puerto del servidor</label><input id="port" name="port" type="number" min="1024" max="65535" value="3000" inputmode="numeric"></div><p class="field-hint" id="local-mode-hint" hidden>Una dirección local sirve para Gemini CLI. Gemini en el navegador necesita una dirección HTTPS pública.</p></div></details>
+            </section>
+            <p class="form-error" id="form-error" role="alert" hidden></p>
+            <div class="form-footer"><button class="button quiet" id="previous-step" type="button" hidden>Anterior</button><span class="step-caption" id="step-caption">Paso 1 de 3</span><button class="button primary" id="next-step" type="submit"><span id="next-step-label">Continuar</span><svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></button></div>
+          </form>
+        </section>
+
+        <section class="dashboard" id="dashboard" aria-labelledby="dashboard-title" hidden>
+          <div class="connection-panel panel"><div class="panel-heading"><div><p class="eyebrow">TU CONEXIÓN</p><h2 id="dashboard-title">Todo preparado</h2></div><span class="status-pill" id="dashboard-status"><span class="status-dot"></span><span id="dashboard-status-text">Detenida</span></span></div>
+            <p class="connection-message" id="runtime-message">Inicia la conexión cuando quieras trabajar con Gemini.</p>
+            <dl class="config-summary"><div><dt><svg class="icon" aria-hidden="true"><use href="#icon-folder"/></svg>Carpeta compartida</dt><dd id="summary-workspace"></dd></div><div><dt><svg class="icon" aria-hidden="true"><use href="#icon-shield"/></svg>Permisos</dt><dd id="summary-profile"></dd></div><div><dt><svg class="icon" aria-hidden="true"><use href="#icon-link"/></svg>Conectar con</dt><dd id="summary-target"></dd></div></dl>
+            <div class="endpoint-section" id="endpoint-section" hidden><label for="endpoint">Dirección para conectar Gemini</label><div class="input-with-button"><input id="endpoint" type="text" readonly spellcheck="false"><button id="copy-endpoint" class="button secondary" type="button"><svg class="icon" aria-hidden="true"><use href="#icon-copy"/></svg><span>Copiar</span></button></div></div>
+            <div class="connection-actions"><button class="button primary" id="start-button" type="button"><svg class="icon" aria-hidden="true"><use href="#icon-play"/></svg><span>Iniciar conexión</span></button><button class="button secondary" id="stop-button" type="button" hidden><svg class="icon" aria-hidden="true"><use href="#icon-stop"/></svg><span>Detener conexión</span></button><button class="button primary" id="install-cli" type="button"><svg class="icon" aria-hidden="true"><use href="#icon-command"/></svg>Configurar Gemini CLI</button><button class="button quiet" id="edit-config" type="button">Editar configuración</button></div>
+          </div>
+          <section class="next-steps" aria-labelledby="next-steps-title"><div class="next-steps-heading"><span class="section-icon"><svg class="icon" aria-hidden="true"><use href="#icon-star"/></svg></span><div><p class="eyebrow">EL ÚLTIMO PASO</p><h3 id="next-steps-title">Ahora, conéctalo en Gemini</h3></div></div><div id="web-instructions"><ol class="instruction-list"><li><span>1</span><div><strong>Inicia la conexión aquí</strong><p>Aparecerá la dirección de tu servidor. Cópiala.</p></div></li><li><span>2</span><div><strong>Añade un conector personalizado en Gemini</strong><p>Abre Conectores, pulsa el signo + y elige «Agregar conector personalizado». Añade la dirección de tu servidor.</p></div></li><li><span>3</span><div><strong>Autoriza el acceso</strong><p>Usa el usuario y la contraseña que creaste para esta conexión.</p></div></li></ol><div class="instruction-links"><a class="button secondary small" href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">Abrir Gemini<svg class="icon tiny" aria-hidden="true"><use href="#icon-external"/></svg></a><a href="https://support.google.com/gemini/answer/17209137?hl=es" target="_blank" rel="noopener noreferrer">No encuentro los conectores personalizados</a></div></div><div id="cli-instructions" hidden><p>Guarda esta conexión en la configuración de Gemini CLI. Después, abre Gemini CLI y autoriza el acceso si te lo pide.</p><p class="field-hint">Gemini CLI debe estar instalado en tu equipo.</p></div></section>
+        </section>
+        <div class="under-panel-note"><svg class="icon" aria-hidden="true"><use href="#icon-computer"/></svg><p>Mantén esta app abierta mientras uses la conexión.</p><button class="text-button" data-go-help type="button">¿Necesitas ayuda?</button></div>
+      </section>
+
+      <section class="page" id="page-actividad" aria-labelledby="activity-title" hidden>
+        <div class="page-heading"><p class="eyebrow">TODO A LA VISTA</p><h1 id="activity-title" tabindex="-1">Actividad</h1><p>Revisa lo que ocurre y las acciones que necesitan tu permiso.</p></div>
+        <section class="approval-section" id="approval-section" aria-labelledby="approvals-title" hidden><div class="section-heading"><h2 id="approvals-title" tabindex="-1">Necesitan tu permiso</h2><span class="badge" id="pending-count"></span></div><div id="approvals-list"></div></section>
+        <section class="panel activity-panel" aria-labelledby="events-title"><div class="panel-heading"><div><p class="eyebrow">EN ESTE EQUIPO</p><h2 id="events-title">Actividad reciente</h2></div><button class="button quiet small" id="refresh-activity" type="button">Actualizar</button></div><div class="empty-state" id="events-empty"><span class="empty-icon"><svg class="icon" aria-hidden="true"><use href="#icon-activity"/></svg></span><h3>Todo tranquilo por aquí</h3><p>Cuando prepares o inicies la conexión, verás aquí lo que ocurre.</p></div><ol class="event-list" id="events-list"></ol></section>
+      </section>
+
+      <section class="page" id="page-ayuda" aria-labelledby="help-title" hidden>
+        <div class="page-heading"><p class="eyebrow">VAMOS PASO A PASO</p><h1 id="help-title">Estamos para ayudarte</h1><p>Lo que necesitas saber para conectar tu equipo con confianza.</p></div>
+        <section class="help-check panel"><span class="section-icon"><svg class="icon" aria-hidden="true"><use href="#icon-shield"/></svg></span><div><h2>¿La conexión no funciona?</h2><p>Revisa la configuración y los componentes de la app.</p></div><button class="button primary" id="doctor-button" type="button">Revisar conexión</button></section>
+        <div class="help-topics"><details open><summary>¿Qué hace esta app?</summary><p>Gemini PC conecta Gemini con una carpeta de tu equipo mediante MCP. MCP es el protocolo que permite a Gemini utilizar herramientas externas. Aquí puedes elegir la carpeta, los permisos e iniciar o detener esa conexión.</p><p>Esta app es un proyecto independiente, sin afiliación con Google.</p></details><details><summary>¿Gemini puede ver todo mi equipo?</summary><p>Los permisos de archivos se limitan a la carpeta que elegiste. El modo «Solo consultar» no permite modificar archivos; «Trabajar con archivos» añade creación y edición.</p><p>El modo avanzado para proyectos permite ejecutar comandos. Los comandos no están aislados dentro de esa carpeta y pueden acceder a otras partes del equipo.</p></details><details><summary>No aparece «Agregar conector personalizado» en Gemini</summary><p>En Gemini, abre Conectores y pulsa el signo + para buscar «Agregar conector personalizado». Su disponibilidad puede variar según la cuenta. Si la opción no aparece, consulta la ayuda oficial de Gemini.</p><p>Si tu cuenta no tiene esta opción, puedes usar Gemini CLI, si lo tienes instalado.</p><a href="https://support.google.com/gemini/answer/17209137?hl=es" target="_blank" rel="noopener noreferrer">Consultar la ayuda oficial de Gemini<svg class="icon tiny" aria-hidden="true"><use href="#icon-external"/></svg></a></details><details><summary>¿Para qué necesito ngrok?</summary><p>Gemini en el navegador necesita una dirección HTTPS para conectar con tu equipo. ngrok crea esa dirección. Tu código de ngrok se guarda en la configuración local y no se muestra en la actividad.</p><p>Si ya tienes un proxy y una dirección HTTPS, puedes indicarla en Opciones avanzadas. Para Gemini CLI puedes usar una conexión local.</p></details><details><summary>¿Qué usuario y contraseña debo usar?</summary><p>Usa los datos de la conexión que creaste en esta app. No introduzcas tu contraseña de Google. Si los olvidaste, abre «Editar configuración» y cambia el acceso en el paso Conexión.</p></details><details><summary>¿Cómo dejo de compartir la carpeta?</summary><p>Pulsa «Detener conexión» en Inicio. Para volver a trabajar, pulsa «Iniciar conexión» y revisa si la dirección cambió antes de usarla en Gemini.</p><p>En una emergencia, pulsa «Cortar todo», siempre visible en la parte superior. Detiene la conexión y cierra la app sin pedir confirmación. Espera el mensaje de cierre para comprobar que terminó.</p></details></div>
+        <p class="help-footer">La revisión y los avisos se muestran en <a href="#actividad">Actividad</a>.</p>
+      </section>
+      <footer class="main-footer"><span>Conexión MCP para Gemini</span><button class="text-button" id="shutdown-button" type="button">Cerrar aplicación</button></footer>
+    </main>
+  </div>
+  <dialog class="app-dialog" id="shutdown-dialog" aria-labelledby="shutdown-title" aria-describedby="shutdown-dialog-message"><span class="section-icon"><svg class="icon" aria-hidden="true"><use href="#icon-computer"/></svg></span><h2 id="shutdown-title">¿Cerrar Gemini PC?</h2><p id="shutdown-dialog-message"></p><div class="dialog-actions"><button class="button secondary" type="button" id="shutdown-cancel" autofocus>Volver</button><button class="button primary" type="button" id="shutdown-confirm">Cerrar aplicación</button></div></dialog>
+  <dialog class="app-dialog" id="closed-dialog" aria-labelledby="closed-title" aria-describedby="closed-message"><span class="section-icon"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><h2 id="closed-title" tabindex="-1" autofocus>Aplicación cerrada</h2><p id="closed-message">Puedes cerrar esta pestaña. Abre Gemini PC cuando quieras volver a conectar.</p></dialog>
+</body>
+</html>

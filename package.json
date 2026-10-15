@@ -1,0 +1,16 @@
+{
+  "name": "mcp-gemini-pc-installer",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "description": "Panel gráfico local para conectar tus carpetas con Gemini web o Gemini CLI",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node gemini-gui.cjs",
+    "terminal": "node gemini-pc.cjs --terminal",
+    "check": "node --check gemini-gui.cjs && node --check lib/gui-server.cjs && node --check lib/app-engine.cjs && node --check lib/server-patches.cjs && node --check ui/app.js && node --check gemini-pc.cjs",
+    "test": "node --test tests/*.test.cjs",
+    "test:oauth": "node tests/gemini-oauth.cjs",
+    "package:public": "node scripts/prepare-public.cjs"
+  }
+}
